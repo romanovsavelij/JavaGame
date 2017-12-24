@@ -84,13 +84,13 @@ public class GameRenderer implements GLSurfaceView.Renderer  {
 
 /// CHANGED
     private void renderPlayer() {
-        GameUtils.Vector3f pos = camera.getPosition();
+       /* GameUtils.Vector3f pos = camera.getPosition();
         float[] transformation = new float[16];
         Matrix.setIdentityM(transformation, 0);
         Matrix.translateM(transformation, 0, pos.x, land.getH((int)(Math.abs(pos.x) / 512f) * land.getVertexCount(), (int)(Math.abs(pos.z) / 512f)) * land.getVertexCount(), pos.z);
         Matrix.scaleM(transformation, 0, 0.5f, 0.5f, 0.5f);
        // System.out.println(pos.x + " " + pos.y + " " + pos.z);
-        defaultRenderer.renderModel(dragon, transformation, screenMatrix);
+        defaultRenderer.renderModel(dragon, transformation, screenMatrix);*/
     }
 
     public float getHeight(float x, float y) {
@@ -111,9 +111,10 @@ public class GameRenderer implements GLSurfaceView.Renderer  {
             positions = land.getObjects();
             loaded = true;
         }
-        drawPlayer();
         landscapeRenderer.setLight(light);
         defaultRenderer.setLight(light);
+
+        drawPlayer();
         landscapeRenderer.renderModel(land.getModel(), land.getTransformationMatrix(), screenMatrix);
         defaultRenderer.renderModels(tree, positions, screenMatrix);
 
