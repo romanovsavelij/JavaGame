@@ -40,7 +40,6 @@ public class Camera {
     }
 
     public float[] getViewMatrix() {
-        gameRenderer.drawPlayer(positionPlayer);
         Matrix.setIdentityM(viewMatrix, 0);
         GameUtils.Vector3f positionCamera = new GameUtils.Vector3f(0f, 0f, 0f);
         positionCamera.y = (float) (positionPlayer.y + distantionToPlayer * Math.sin(pitch));
@@ -50,6 +49,7 @@ public class Camera {
         Matrix.rotateM(viewMatrix, 0, 180 + (float) ((pitch) * 180f / Math.PI), 1f, 0f, 0f);
         Matrix.rotateM(viewMatrix, 0, (float) (-yaw * 180f / Math.PI), 0f, 1f, 0f);
         Matrix.translateM(viewMatrix, 0, positionCamera.x, positionCamera.y, positionCamera.z);
+        gameRenderer.setPlayerPosition(positionPlayer);
         return viewMatrix;
     }
 

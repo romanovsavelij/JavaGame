@@ -29,6 +29,7 @@ public class GameRenderer implements GLSurfaceView.Renderer  {
     private LoadManager loadManager;
     private Light light = new Light(new GameUtils.Vector3f(512f, 1e4f, 512f), new GameUtils.Vector3f(0.3f, 0.3f, 0.3f));
     float[] projectionMatrix = new float[16];
+    GameUtils.Vector3f positionPlayer;
 
     Camera camera = new Camera(this);
 
@@ -110,6 +111,7 @@ public class GameRenderer implements GLSurfaceView.Renderer  {
             positions = land.getObjects();
             loaded = true;
         }
+        drawPlayer();
         landscapeRenderer.setLight(light);
         defaultRenderer.setLight(light);
         landscapeRenderer.renderModel(land.getModel(), land.getTransformationMatrix(), screenMatrix);
@@ -119,10 +121,14 @@ public class GameRenderer implements GLSurfaceView.Renderer  {
 
     }
 
-    public void drawPlayer(GameUtils.Vector3f position) {
+    public void setPlayerPosition(GameUtils.Vector3f position) {
+        positionPlayer = position;
+    }
+
+    public void drawPlayer() {
         float[] tmp = new float[16];
         Matrix.setIdentityM(tmp, 0);
-        Matrix.translateM(tmp, 0, position.x, -position.y, position.z);
+        Matrix.translateM(tmp, 0, positionPlayer.x, -positionPlayer.y, positionPlayer.z);
         Matrix.scaleM(tmp, 0, 1f, 1f, 1f);
         defaultRenderer.renderModel(dragon, tmp, screenMatrix);
 
