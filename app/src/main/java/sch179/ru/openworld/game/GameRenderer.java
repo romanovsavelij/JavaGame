@@ -1,26 +1,26 @@
-package sch179.ru.openworld.game;
+        package sch179.ru.openworld.game;
 
-import android.opengl.GLES20;
-import android.opengl.GLES30;
-import android.opengl.GLSurfaceView;
-import android.opengl.Matrix;
-import android.util.Log;
+        import android.opengl.GLES20;
+        import android.opengl.GLES30;
+        import android.opengl.GLSurfaceView;
+        import android.opengl.Matrix;
+        import android.util.Log;
 
-import java.util.List;
+        import java.util.List;
 
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
+        import javax.microedition.khronos.egl.EGLConfig;
+        import javax.microedition.khronos.opengles.GL10;
 
-import sch179.ru.openworld.R;
-import sch179.ru.openworld.engine.Camera;
-import sch179.ru.openworld.engine.Light;
-import sch179.ru.openworld.engine.LoadManager;
-import sch179.ru.openworld.engine.Model;
-import sch179.ru.openworld.engine.Transformation;
-import sch179.ru.openworld.game.defaultRenderUtils.DefaultRenderer;
-import sch179.ru.openworld.game.landscape.LandscapeModel;
-import sch179.ru.openworld.game.landscape.LandscapeRenderer;
-import sch179.ru.openworld.utils.GameUtils;
+        import sch179.ru.openworld.R;
+        import sch179.ru.openworld.engine.Camera;
+        import sch179.ru.openworld.engine.Light;
+        import sch179.ru.openworld.engine.LoadManager;
+        import sch179.ru.openworld.engine.Model;
+        import sch179.ru.openworld.engine.Transformation;
+        import sch179.ru.openworld.game.defaultRenderUtils.DefaultRenderer;
+        import sch179.ru.openworld.game.landscape.LandscapeModel;
+        import sch179.ru.openworld.game.landscape.LandscapeRenderer;
+        import sch179.ru.openworld.utils.GameUtils;
 
 public class GameRenderer implements GLSurfaceView.Renderer  {
 
@@ -82,7 +82,7 @@ public class GameRenderer implements GLSurfaceView.Renderer  {
         Matrix.multiplyMM(screenMatrix, 0, projectionMatrix, 0, camera.getViewMatrix(), 0);
     }
 
-/// CHANGED
+    /// CHANGED
     private void renderPlayer() {
        /* GameUtils.Vector3f pos = camera.getPosition();
         float[] transformation = new float[16];

@@ -22,17 +22,25 @@ public class Camera {
         return positionPlayer;
     }
 
-    public void TopButtonPressed(float s) { positionPlayer.y -= s; }
+    public void TopButtonPressed(float s) {
+        positionPlayer.x += s * Math.sin(yaw);
+        positionPlayer.z += s * Math.cos(yaw);
+    }
 
     public void RightButtonPressed(float s) {
-        positionPlayer.z += s;
+        positionPlayer.x -= s * Math.sin(yaw + Math.PI / 2);
+        positionPlayer.z -= s * Math.cos(yaw + Math.PI / 2);
     }
 
     public void LeftButtonPressed(float s) {
-        positionPlayer.z -= s;
+        positionPlayer.x += s * Math.sin(yaw + Math.PI / 2);
+        positionPlayer.z += s * Math.cos(yaw + Math.PI / 2);
     }
 
-    public void BottomButtonPressed(float s) { positionPlayer.y += s; }
+    public void BottomButtonPressed(float s) {
+        positionPlayer.x -= s * Math.sin(yaw);
+        positionPlayer.z -= s * Math.cos(yaw);
+    }
 
     public void turn(float x, float y) {
         yaw += x;
