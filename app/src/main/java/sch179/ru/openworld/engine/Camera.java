@@ -35,8 +35,8 @@ public class Camera {
     public void BottomButtonPressed(float s) { positionPlayer.z -= s; }
 
     public void turn(float x, float y) {
-        //yaw += x;
-        pitch += y;
+        yaw += x;
+        //pitch += y;
     }
 
     public float[] getViewMatrix() {
@@ -46,8 +46,9 @@ public class Camera {
         float distInXZ = (float) (distantionToPlayer * Math.cos(pitch));
         positionCamera.x = (float) (positionPlayer.x + distInXZ * Math.sin(yaw));
         positionCamera.z = (float) (positionPlayer.z + distInXZ * Math.cos(yaw));
-        Matrix.rotateM(viewMatrix, 0, 180 + (float) ((pitch) * 180f / Math.PI), 1f, 0f, 0f);
-        Matrix.rotateM(viewMatrix, 0, (float) ((yaw) * 180f / Math.PI), 0f, 1f, 0f);
+        Log.d("yaw", String.valueOf((yaw) * 180f / Math.PI));
+       // Matrix.rotateM(viewMatrix, 0, 180 + (float) ((pitch) * 180f / Math.PI), 1f, 0f, 0f);
+        Matrix.rotateM(viewMatrix, 0, 180 + (float) (-yaw * 180f / Math.PI), 0f, 1f, 0f);
         Matrix.translateM(viewMatrix, 0, positionCamera.x, positionCamera.y, positionCamera.z);
         return viewMatrix;
     }
