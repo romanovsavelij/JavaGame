@@ -59,6 +59,7 @@ public class GameActivity extends Activity implements View.OnClickListener, View
 
         item.setOnTouchListener(this);
 
+
         Button button;
         button = findViewById(R.id.buttonLeft);
         button.setOnClickListener(this);
