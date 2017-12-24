@@ -16,14 +16,13 @@ void calcDiffuseColor(float ambient) {
     diffuseLight = (brightness * (vec4(lightColor, 1.0f)));
 }
 
-
 void main() {
 
     vec4 texture_color = texture2D(modelTexture, textureCoord);
     if (texture_color.a < 0.5)
         discard;
 
-    calcDiffuseColor(0.7f);
+    calcDiffuseColor(0.0f);
 
     gl_FragColor = diffuseLight * texture_color;
 }

@@ -21,6 +21,8 @@ public class DefaultShaderProgram extends ShaderProgram {
     }
 
     public void loadLight(Light light) {
+       // System.out.println(light.getPosition().x + " " + light.getPosition().y + " "  + light.getPosition().z);
+
         super.loadVector3f(location_toLightVector, light.getPosition());
         super.loadVector3f(location_lightColor, light.getColor());
     }
@@ -29,7 +31,7 @@ public class DefaultShaderProgram extends ShaderProgram {
     protected void getAllUniformLocation() {
         location_transformationMatrix = super.getUniformLocation("transformationMatrix");
         location_lightColor = super.getUniformLocation("lightColor");
-        location_toLightVector = super.getUniformLocation("toLightVector");
+        location_toLightVector = super.getUniformLocation("lightPosition");
     }
 
     @Override
