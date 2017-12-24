@@ -108,20 +108,20 @@ public class GameActivity extends Activity implements View.OnClickListener, View
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
+        float x = motionEvent.getX();
+        float y = motionEvent.getY();
         if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
-            float x = motionEvent.getX();
-            float y = motionEvent.getY();
             if (xold != -1 && yold != -1) {
-                float deltax = x - xold;
-                float deltay = y - yold;
-                float speed = 1f;
-                deltax *= speed;
-                deltay *= speed;
-                camera.turn(deltax / 5.0f, deltay / 5.0f);
+                float deltaX = x - xold;
+                float deltaY = y - yold;
+                float SPEED = 0.01f;               //     <---- SPEED
+                deltaX *= SPEED;
+                deltaY *= SPEED;
+                camera.turn(deltaX, deltaY);
             }
-            xold = x;
-            yold = y;
         }
+        xold = x;
+        yold = y;
         return true;
     }
 }
