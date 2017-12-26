@@ -1,5 +1,6 @@
 package sch179.ru.openworld;
 
+import android.graphics.Point;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.app.ActivityManager;
@@ -8,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +28,7 @@ public class GameActivity extends Activity implements View.OnTouchListener {
     Camera camera;
     private float xold = -1, yold = -1;
     private final float SPEED = 0.01f;                   //<----- MOVING SPEED
+    private float displayWidth;
     Joystick joystick;
 
     void createSuffaceView() {
@@ -62,6 +65,12 @@ public class GameActivity extends Activity implements View.OnTouchListener {
         item.setOnTouchListener(this);
 
         joystick = findViewById(R.id.joystick);
+
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        displayWidth = size.x;
     }
 
 
@@ -82,7 +91,7 @@ public class GameActivity extends Activity implements View.OnTouchListener {
     public boolean onTouch(View view, MotionEvent motionEvent) {
         float x = motionEvent.getX();
         float y = motionEvent.getY();
-        if (joystick.isClicked(x, y)) {
+        if (x < displayWidth / 2) {
             joystick.touched(x, y);
             float dX = joystick.getdX(), dY = joystick.getdY();
             dX *= SPEED;

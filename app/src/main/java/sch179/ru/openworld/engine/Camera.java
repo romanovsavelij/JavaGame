@@ -23,7 +23,6 @@ public class Camera {
     }
 
     public void TopButtonPressed(float s) {
-        Log.d("logstr", String.valueOf(s));
         positionPlayer.x += s * Math.sin(yaw);
         positionPlayer.z += s * Math.cos(yaw);
     }
