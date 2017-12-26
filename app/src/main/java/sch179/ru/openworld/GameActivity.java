@@ -15,16 +15,18 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import sch179.ru.openworld.engine.Camera;
+import sch179.ru.openworld.engine.Joystick;
 import sch179.ru.openworld.utils.GameUtils;
 import sch179.ru.openworld.game.GameRenderer;
 
-public class GameActivity extends Activity implements View.OnClickListener, View.OnTouchListener {
+public class GameActivity extends Activity implements View.OnTouchListener {
 
     private GLSurfaceView glSurfaceView;
     private boolean rendererSet = false;
     Camera camera;
-    int s = 7;
     private float xold = -1, yold = -1;
+    private final float SPEED = 0.01f;                   //<----- MOVING SPEED
+    Joystick joystick;
 
     void createSuffaceView() {
 
@@ -59,20 +61,7 @@ public class GameActivity extends Activity implements View.OnClickListener, View
 
         item.setOnTouchListener(this);
 
-
-        Button button;
-        button = findViewById(R.id.buttonLeft);
-        button.setOnClickListener(this);
-        button.setTag("left");
-        button = findViewById(R.id.buttonRight);
-        button.setOnClickListener(this);
-        button.setTag("right");
-        button = findViewById(R.id.buttonUp);
-        button.setOnClickListener(this);
-        button.setTag("up");
-        button = findViewById(R.id.buttonDown);
-        button.setOnClickListener(this);
-        button.setTag("down");
+        joystick = findViewById(R.id.joystick);
     }
 
 
@@ -90,34 +79,35 @@ public class GameActivity extends Activity implements View.OnClickListener, View
     }
 
     @Override
-    public void onClick(View view) {
-        Button button = (Button) view;
-
-        if (button.getTag() == "left") {
-            camera.LeftButtonPressed(s);
-        }
-        if (button.getTag() == "right") {
-            camera.RightButtonPressed(s);
-        }
-        if (button.getTag() == "up") {
-            camera.TopButtonPressed(s);
-        }
-        if (button.getTag() == "down") {
-            camera.BottomButtonPressed(s);
-        }
-    }
-
-    @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         float x = motionEvent.getX();
         float y = motionEvent.getY();
+        if (joystick.isClicked(x, y)) {
+            joystick.touched(x, y);
+            float dX = joystick.getdX(), dY = joystick.getdY();
+            dX *= SPEED;
+            dY *= SPEED;
+            if (dX > 0) {
+                camera.RightButtonPressed(dX);
+            }
+            else {
+                camera.LeftButtonPressed(-dX);
+            }
+            if (dY < 0) {
+                camera.TopButtonPressed(-dY);
+            }
+            else {
+                camera.BottomButtonPressed(dY);
+            }
+            return true;
+        }
         if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
             if (xold != -1 && yold != -1) {
                 float deltaX = x - xold;
                 float deltaY = y - yold;
-                float SPEED = 0.01f;               //     <---- SPEED
-                deltaX *= SPEED;
-                deltaY *= SPEED;
+                float SPEEDR = 0.01f;               //     <---- ROTATION SPEED
+                deltaX *= SPEEDR;
+                deltaY *= SPEEDR;
                 camera.turn(deltaX, deltaY);
             }
         }
@@ -125,4 +115,5 @@ public class GameActivity extends Activity implements View.OnClickListener, View
         yold = y;
         return true;
     }
+
 }
