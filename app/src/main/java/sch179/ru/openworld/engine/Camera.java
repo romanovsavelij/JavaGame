@@ -10,7 +10,7 @@ public class Camera {
     
     private GameUtils.Vector3f positionPlayer = new GameUtils.Vector3f(0f, -100f, 0f);
     private float[] viewMatrix = new float[16];
-    private float yaw = 0f, pitch = 0f;
+    private float yaw = (float) Math.PI / 2, pitch = (float) -Math.PI;
     private GameRenderer gameRenderer;
     private float distantionToPlayer = 80f;
 
@@ -45,6 +45,8 @@ public class Camera {
     public void turn(float x, float y) {
         yaw += x;
         pitch -= y;
+        pitch = (float) Math.max(-Math.PI, pitch);
+        pitch = (float) Math.min(-Math.PI / 2 * 4/5, pitch);
     }
 
     public float[] getViewMatrix() {
