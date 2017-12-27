@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.View;
 
 public class Joystick extends View {
-    private final float centerX = 200f, centerY = 300f, radius = 170f;
+    private final float centerX = 200f, centerY = 380f, radius = 170f;
     private float drawX = centerX, drawY = centerY, drawR = 80f;
     private float dX = 0, dY = 0;
     private boolean wasTouched = false;
@@ -22,6 +22,8 @@ public class Joystick extends View {
     public Joystick(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
+
+    private int c = 0;
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -36,6 +38,11 @@ public class Joystick extends View {
         else {
             canvas.drawCircle(centerX, centerY, drawR, paint);
         }
+        if (c == 40) {
+            wasTouched = false;
+            c = 0;
+        }
+        ++c;
         invalidate();
     }
 
@@ -48,13 +55,17 @@ public class Joystick extends View {
 
     public void touched(float x, float y) {
         wasTouched = true;
-        if (!isClicked(x, y)) {
-            return;
+        if (isClicked(x, y)) {
+            drawX = x;
+            drawY = y;
         }
-        dX = x - centerX;
-        dY = y - centerY;
-        drawX = x;
-        drawY = y;
+        else {
+            float len = (float) Math.sqrt((x - centerX) * (x - centerX) + (y - centerY) * (y - centerY));
+            drawX = centerX + ((x - centerX) / len) * radius;
+            drawY = centerY + ((y - centerY) / len) * radius;
+        }
+        dX = drawX - centerX;
+        dY = drawY - centerY;
     }
 
     public float getdX() {
