@@ -14,10 +14,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Score: "
+                android:text="    Level: "
+                android:gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:id="@+id/level"
+                android:gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="    Remaining coins: "
                 android:gravity="center_horizontal"/>
 
             <TextView
@@ -26,6 +40,8 @@
                 android:text="0"
                 android:id="@+id/score"
                 android:gravity="center_horizontal"/>
+
+
         </LinearLayout>
 
         <LinearLayout
