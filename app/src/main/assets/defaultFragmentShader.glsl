@@ -7,13 +7,13 @@ varying vec3 surfaceNormal;
 uniform vec3 lightColor;
 uniform sampler2D modelTexture;
 
-vec4 diffuseLight = vec4(1f, 1f, 1f, 1f);
+vec4 diffuseLight = vec4(1, 1, 1, 1);
 
 void calcDiffuseColor(float ambient) {
     vec3 unitNormal = normalize(surfaceNormal);
     vec3 unitLightVector = normalize(toLightVector);
     float brightness = max(dot(unitNormal, unitLightVector), ambient);
-    diffuseLight = (brightness * (vec4(lightColor, 1.0f)));
+    diffuseLight = (brightness * (vec4(lightColor, 1.0)));
 }
 
 void main() {
@@ -22,7 +22,9 @@ void main() {
     if (texture_color.a < 0.5)
         discard;
 
-    calcDiffuseColor(0.0f);
+    calcDiffuseColor(0.0);
 
-    gl_FragColor = diffuseLight * texture_color;
+    vec4 ambient = vec4(1, 1, 1, 1) * 0.1;
+
+    gl_FragColor = (diffuseLight + ambient) * texture_color;
 }

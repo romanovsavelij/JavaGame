@@ -12,10 +12,10 @@ varying vec3 surfaceNormal;
 void main()
 {
 
-    vec4 worldCoords = transformationMatrix * vec4(position, 1.0f);
+    vec4 worldCoords = transformationMatrix * vec4(position, 1.0);
 
     textureCoord = textureCoords;
-    surfaceNormal = (vec4(normal, 0.0f)).xyz;
+    surfaceNormal = (vec4(normal, 0.0)).xyz;
     toLightVector = lightPosition - position;
 
     gl_Position = worldCoords;
